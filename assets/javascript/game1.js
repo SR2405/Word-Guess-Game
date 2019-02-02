@@ -21,15 +21,17 @@ var pickedWord = '';
 
 // newGame function to reset all stats, pick new word and create placeholders
 function newGame (){
-    gameRunning =true;
+    gameRunning = true;
     guessesLeft=12;
     guessedLetterBank=[];
     incorrectLetterBank = [];
     pickedWordUnderscoresArr = [];
 
+    console.log("!");
+
     pickedWord = wordBank[Math.floor(Math.random()* wordBank.length)];
 
-            for (var i=0;i < pickedWord.lenght; i++){
+            for (var i=0;i < pickedWord.length; i++){
                 if (pickedWord[i] === ' '){
                     pickedWordUnderscoresArr.push(' ');
                 } else {
@@ -52,12 +54,17 @@ function letterGuess (letter){
             
              guessedLetterBank.push(letter);
 
-                for (var i = 0;i<pickedWord.length ;i++){
+                for (var i = 0; i<pickedWord.length ;i++){
                     if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
                     // if a match, swip _ for letter
                         pickedWordUnderscoresArr[i] = pickedWord[i];
+
                         }         
                     }
+            underscoresDiv.textContent = pickedWordUnderscoresArr
+
+            checkIncorrect(letter);
+            
             }
 
             else{
@@ -73,7 +80,6 @@ function letterGuess (letter){
 // checkLose, updates wrong guess letter lists
 
 // check incorrect letter
-underscoresDiv.textContent = pickedWordUnderscoresArr
 
 function checkIncorrect(letter) {
 
@@ -101,7 +107,7 @@ function checkIncorrect(letter) {
 function checkwins(){
     if (pickedWord===pickedWordUnderscoresArr){
         wins++;
-        winsDiv.textContent = wins;
+        // winsDiv.textContent = wins;
     }
 }
 
@@ -110,7 +116,7 @@ function checkwins(){
 // add point to "win"
 
 //Add event listerner for new game button
-window.addEventListener('keypress', newGame);
+// window.addEventListener('keypress', newGame);
 
 //Add onekeyup event to trigger letterGuess
 
@@ -119,3 +125,4 @@ document.onkeyup = function(event){
         letterGuess(event.key);
     }
 }
+newGame();
