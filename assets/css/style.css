@@ -1,0 +1,31 @@
+
+body{
+    background-image: url(../images/Melamine-wood-001.png)
+}
+.container{
+    border: solid, 8px;
+    color:pink;
+    margin: auto;
+}
+.col {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; 
+  }
+  
+  .row:after {
+    display: table;
+    clear: both;
+  }
+
+  img{
+      width: 100px;
+      height: 70px;
+
+  }
+
+  #underscores {
+      letter-spacing: 6px;
+      font-size: 40px;
+  }
