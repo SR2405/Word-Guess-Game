@@ -2,28 +2,32 @@
 body{
     background-image: url(../images/Melamine-wood-001.png)
 }
-.container{
-    border: solid, 8px;
-    color:pink;
+
+h1{
+    font-family: 'Lobster', cursive;
+
+}
+.container-fluid{
+    border-bottom: solid, 8px, white;
     margin: auto;
+    font-size: 50px;
 }
 .col {
-    float: left;
-    width: 50%;
+    width: 20px;
     padding: 10px;
     height: 300px; 
   }
   
-  .row:after {
+  /* .row:after {
     display: table;
     clear: both;
-  }
+  } */
 
   img{
-      width: 100px;
-      height: 70px;
+      width: 70%;
+      height: 80%;
 
-  }
+  } 
 
   #underscores {
       letter-spacing: 6px;

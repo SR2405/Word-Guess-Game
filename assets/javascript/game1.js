@@ -4,6 +4,7 @@ var winsDiv = document.getElementById("wins");
 var underscoresDiv = document.getElementById("underscores");
 var guessesLeftDiv = document.getElementById("guessesLeft");
 var guessedLettersDiv = document.getElementById("guessedLetters");
+var sound = document.getElementById("sound");
 
 //create variable for game (wordBank, wins, guesses left, game running, picked word placeholder, incorrect letter bank)
 var wordBank = ["Michael Jordan", "bryant", "shooter", "fouls", "Lakers","Sixers","hoop","coach","guard"];
@@ -111,17 +112,25 @@ function checkIncorrect(letter) {
             }
 
 
-}
+}   
 
 
 // check wins
 
 function checkwins(){
+    var soundFlag =true;
+
 if (pickedWord.toLowerCase() === pickedWordUnderscoresArr.join('').toLowerCase())
         {   wins++;
-            alert("CONGRATULATIONS!");
             gameRunning= false;
             winsDiv.textContent = wins; 
+
+                if (soundFlag){
+                sound.pause();
+                sound.currentTime = 0;
+                sound.play();
+                soundFlag = false;}
+
             newGame();
         }
 
@@ -140,4 +149,6 @@ document.onkeyup = function(event){
         letterGuess(event.key);
     }
 }
+
+
 newGame();
