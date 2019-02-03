@@ -1,8 +1,4 @@
-//Grab Reference from DOM
-// var $wins = document.getElementById('wins');
-// var $underscores = document.getElementById('underscores');
-// var $guessesLeft = document.getElementById('guessesLeft');
-// var $guessedLetters = document.getElementById('guessedLetters');
+
 
 var winsDiv = document.getElementById("wins");
 var underscoresDiv = document.getElementById("underscores");
@@ -10,7 +6,7 @@ var guessesLeftDiv = document.getElementById("guessesLeft");
 var guessedLettersDiv = document.getElementById("guessedLetters");
 
 //create variable for game (wordBank, wins, guesses left, game running, picked word placeholder, incorrect letter bank)
-var wordBank = ["Michael Jordan", "bryant", "shooter", "fouls"];
+var wordBank = ["Michael Jordan", "bryant", "shooter", "fouls", "Lakers","Sixers","hoop","coach","guard"];
 var wins = 0;
 var gameRunning = false;
 var incorrectLetterBank = [];
@@ -19,6 +15,9 @@ var guessesLeft = 12;
 var guessedLetterBank =[];
 var pickedWord = '';
 
+
+
+
 // newGame function to reset all stats, pick new word and create placeholders
 function newGame (){
     gameRunning = true;
@@ -26,8 +25,9 @@ function newGame (){
     guessedLetterBank=[];
     incorrectLetterBank = [];
     pickedWordUnderscoresArr = [];
-
-    console.log("!");
+    
+    
+    // console.log("!");
 
     pickedWord = wordBank[Math.floor(Math.random()* wordBank.length)];
 
@@ -38,6 +38,7 @@ function newGame (){
                     pickedWordUnderscoresArr.push('_');
                 }
             }
+
     
     //write all to the DOM
     guessesLeftDiv.textContent = guessesLeft; 
@@ -59,14 +60,18 @@ function letterGuess (letter){
                     // if a match, swip _ for letter
                         pickedWordUnderscoresArr[i] = pickedWord[i];
 
-                        }         
+                        }   
+      
                     }
             underscoresDiv.textContent = pickedWordUnderscoresArr
 
-            checkIncorrect(letter);
-            
-            }
+                        console.log(checkwins);
 
+            checkIncorrect(letter);
+            checkwins();
+  
+
+            }
             else{
                 if(!gameRunning) {
                     alert("Try a new letter!");
@@ -74,6 +79,9 @@ function letterGuess (letter){
             }
 
 }
+
+
+
 
 // check incorrect letter
 
@@ -90,6 +98,10 @@ function checkIncorrect(letter) {
                 //decrement guessesLeft
                 guessesLeft--;
 
+                if(guessesLeft===0){
+                    newGame();
+                }
+
                 // add incorrect letter to incorrectLetterBank
                 incorrectLetterBank.push(letter);
                 //write new bank of incorrect letters to DOM
@@ -105,18 +117,21 @@ function checkIncorrect(letter) {
 // check wins
 
 function checkwins(){
-    if (pickedWord===pickedWordUnderscoresArr){
-        wins++;
-        // winsDiv.textContent = wins;
-    }
-}
+if (pickedWord.toLowerCase() === pickedWordUnderscoresArr.join('').toLowerCase())
+        {   wins++;
+            alert("CONGRATULATIONS!");
+            gameRunning= false;
+            winsDiv.textContent = wins; 
+            newGame();
+        }
 
+}
+    //  wins++; document.getElementById('wins').innerHtml = wins;}
 //replaces placeholder with letter
 
 // add point to "win"
 
-//Add event listerner for new game button
-// window.addEventListener('keypress', newGame);
+
 
 //Add onekeyup event to trigger letterGuess
 
