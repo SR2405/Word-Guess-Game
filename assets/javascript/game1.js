@@ -5,9 +5,11 @@ var underscoresDiv = document.getElementById("underscores");
 var guessesLeftDiv = document.getElementById("guessesLeft");
 var guessedLettersDiv = document.getElementById("guessedLetters");
 var sound = document.getElementById("sound");
+var correctWordDiv = document.getElementById("correct-word");
+
 
 //create variable for game (wordBank, wins, guesses left, game running, picked word placeholder, incorrect letter bank)
-var wordBank = ["Michael Jordan", "bryant", "shooter", "fouls", "Lakers","Sixers","hoop","coach","guard"];
+var wordBank = ["Michael Jordan", "Kobe Bryant", "Shooter", "Fouls", "Lakers","Sixers","Hoop","Coach","Guard","Free Throw"];
 var wins = 0;
 var gameRunning = false;
 var incorrectLetterBank = [];
@@ -22,11 +24,10 @@ var pickedWord = '';
 // newGame function to reset all stats, pick new word and create placeholders
 function newGame (){
     gameRunning = true;
-    guessesLeft=12;
+    guessesLeft=10;
     guessedLetterBank=[];
     incorrectLetterBank = [];
     pickedWordUnderscoresArr = [];
-    
     
     // console.log("!");
 
@@ -43,9 +44,8 @@ function newGame (){
     
     //write all to the DOM
     guessesLeftDiv.textContent = guessesLeft; 
-    underscores.textContent = pickedWordUnderscoresArr.join('');
+    underscoresDiv.textContent = pickedWordUnderscoresArr.join('');
     guessedLettersDiv.textContent = incorrectLetterBank;
-    
 }
 
 
@@ -60,22 +60,19 @@ function letterGuess (letter){
                     if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
                     // if a match, swip _ for letter
                         pickedWordUnderscoresArr[i] = pickedWord[i];
-
-                        }   
-      
-                    }
-            underscoresDiv.textContent = pickedWordUnderscoresArr
+                    }   
+                }
+                underscores.textContent = pickedWordUnderscoresArr.join('');
 
                         console.log(checkwins);
 
-            checkIncorrect(letter);
-            checkwins();
+                checkIncorrect(letter);
+                checkwins();
   
-
             }
             else{
                 if(!gameRunning) {
-                    alert("Try a new letter!");
+                    alert("Try Again!");
                 }
             }
 
@@ -93,9 +90,11 @@ function letterGuess (letter){
 function checkIncorrect(letter) {
 
 //check to see if letter didnt make it into our underscore (incorrect)
-    if ( pickedWordUnderscoresArr.indexOf(letter.toLowerCase()) === -1
+    if ( 
+        pickedWordUnderscoresArr.indexOf(letter.toLowerCase()) === -1
             &&
-            pickedWordUnderscoresArr.indexOf(letter.toUpperCase()) === -1) { 
+            pickedWordUnderscoresArr.indexOf(letter.toUpperCase()) === -1
+            ) { 
                 //decrement guessesLeft
                 guessesLeft--;
 
@@ -120,25 +119,29 @@ function checkIncorrect(letter) {
 function checkwins(){
     var soundFlag =true;
 
-if (pickedWord.toLowerCase() === pickedWordUnderscoresArr.join('').toLowerCase())
-        {   wins++;
-            gameRunning= false;
-            winsDiv.textContent = wins; 
+    if (pickedWord.toLowerCase() === pickedWordUnderscoresArr.join('').toLowerCase()) {
+        // add point to "win"
+  
+              wins++;
+                gameRunning= false;
+                winsDiv.textContent = wins; 
+                correctWordDiv.textContent = pickedWord.toUpperCase();
+                    
 
                 if (soundFlag){
                 sound.pause();
                 sound.currentTime = 0;
                 sound.play();
-                soundFlag = false;}
+                soundFlag = false;
+                }
 
-            newGame();
-        }
+
+                newGame();
+            }
 
 }
-    //  wins++; document.getElementById('wins').innerHtml = wins;}
-//replaces placeholder with letter
+console.log(checkwins);
 
-// add point to "win"
 
 
 
